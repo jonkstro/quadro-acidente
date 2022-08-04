@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'head' %}
+  <link rel = "stylesheet" type = "text/css" href = "{% static 'plataforma/css/estilos.css' %}">
+{% endblock %}
+
+{% block 'titulo'%}
+  Listar acidentes
+{% endblock%}
+
+{% block 'body'%}
+    <div class="home">
+        <div class="col-md-12">
+            <h2>Selecione o período que ocorreram os acidentes: </h2>
+        <form method="POST">         
+            <div class="col">        
+                <label>Data Inicial:</label>
+                <input type="date" name="dataInicial"> <br>
+            </div>
+            <div class="col">        
+                <label>Data Final:</label>
+                <input type="date" name="dataFinal"> <br>
+            </div>
+            
+            <button type="submit" name="btn" class="btn btn-primary">Listar Acidentes</button>
+            <a href="../index.php" class="btn btn-secondary">Retornar</a>
+        </form>
+        </div>
+    </div>
+{% endblock%}

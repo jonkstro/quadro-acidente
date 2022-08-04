@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'head' %}
+  <link rel = "stylesheet" type = "text/css" href = "{% static 'plataforma/css/estilos.css' %}">
+{% endblock %}
+
+{% block 'titulo'%}
+  Contagem de dias sem acidente
+{% endblock%}
+
+{% block 'body'%}
+	<div class="home">
+		<h1>Estamos a <FONT COLOR="red">365</FONT> dias sem acidente</h1>
+	</div>
+  <div class="row">
+    <a href="" class="btn btn-primary btn-lg">Listar Acidentes</a>
+    <a href="" class="btn btn-primary btn-lg">Cadastrar Acidente</a>
+  </div>
+{% endblock%}

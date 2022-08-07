@@ -1,21 +1,29 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% load static %} 
 
-{% load static %}
+{% if messages %}
+  <br>
+  {% for message in messages %}
+    <div class="alert {{message.tags}}">
+    {{message}}
+    </div>
+  {% endfor %}
+{% endif %}
 
 {% block 'head' %}
-  <link rel = "stylesheet" type = "text/css" href = "{% static 'plataforma/css/estilos.css' %}">
-{% endblock %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'plataforma/css/estilos.css' %}"
+/>
+{% endblock %} 
 
-{% block 'titulo'%}
-  Contagem de dias sem acidente
-{% endblock%}
-
+{% block 'titulo'%} Contagem de dias sem acidente {% endblock%}
 {% block 'body'%}
-	<div class="home">
-		<h1>Estamos a <FONT COLOR="red">365</FONT> dias sem acidente</h1>
-	</div>
-  <div class="row">
-    <a href="" class="btn btn-primary btn-lg">Listar Acidentes</a>
-    <a href="" class="btn btn-primary btn-lg">Cadastrar Acidente</a>
-  </div>
+<div class="home">
+  <h1>Estamos a <font color="red">{{dias}}</font> dias sem acidente</h1>
+</div>
+<div class="row">
+  <a href="{% url 'listar_acidente' %}" class="btn btn-primary btn-lg">Listar Acidentes</a>
+  <a href="{% url 'cadastrar_acidente' %}" class="btn btn-primary btn-lg">Cadastrar Acidente</a>
+</div>
 {% endblock%}

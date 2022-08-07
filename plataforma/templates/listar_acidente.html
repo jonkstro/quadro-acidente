@@ -1,32 +1,75 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% load static %} 
 
-{% load static %}
+{% if messages %}
+  <br>
+  {% for message in messages %}
+    <div class="alert {{message.tags}}">
+    {{message}}
+    </div>
+  {% endfor %}
+{% endif %}
 
 {% block 'head' %}
-  <link rel = "stylesheet" type = "text/css" href = "{% static 'plataforma/css/estilos.css' %}">
-{% endblock %}
-
-{% block 'titulo'%}
-  Listar acidentes
-{% endblock%}
-
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'plataforma/css/estilos.css' %}"
+/>
+{% endblock %} 
+{% block 'titulo'%} Listar acidentes {% endblock%}
 {% block 'body'%}
-    <div class="home">
-        <div class="col-md-12">
-            <h2>Selecione o período que ocorreram os acidentes: </h2>
-        <form method="POST">         
-            <div class="col">        
-                <label>Data Inicial:</label>
-                <input type="date" name="dataInicial"> <br>
-            </div>
-            <div class="col">        
-                <label>Data Final:</label>
-                <input type="date" name="dataFinal"> <br>
-            </div>
-            
-            <button type="submit" name="btn" class="btn btn-primary">Listar Acidentes</button>
-            <a href="../index.php" class="btn btn-secondary">Retornar</a>
-        </form>
-        </div>
+<div class="home">
+  <div class="col-md-12">
+    <h2>Selecione o período que ocorreram os acidentes:</h2>
+    <form action='{% url 'listar_acidente' %}' method="POST">{% csrf_token %}
+      <div class="col">
+        <label>Data Inicial:</label>
+        <input type="date" name="dataInicial" /> <br />
+      </div>
+      <div class="col">
+        <label>Data Final:</label>
+        <input type="date" name="dataFinal" /> <br />
+      </div>
+
+      <input href="{% url 'listar_acidente'%}" type="submit" name="btn" class="btn btn-success" value='Listar acidentes'></input>
+      <a href="{% url 'quadro'%}" class="btn btn-secondary">Retornar</a>
+    </form>
+  </div>
+    {% if acidentes %}
+    <div class="col-md-12">
+      <table class='table'>
+        <thead>
+          <tr>
+            {% comment %} <th scope="col">id</th> {% endcomment %}
+            <th scope="col">Data</th>
+            <th scope="col">Local</th>
+            <th scope="col">Nome do Funcionario</th>
+          </tr>
+        </trhead>
+        {% for acidente in acidentes%}
+          <tr>
+            {% comment %} <th scope="row">{{acidente.id}}</th> {% endcomment %}
+            <td>{{acidente.data}}</td>
+            <td>{{acidente.local}}</td>
+            <td>{{acidente.nome_funcionario}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
     </div>
+    {% else %}
+      <div class="alert alert-success" role="alert">
+        Nenhum acidente cadastrado nesse período!
+      </div>
+    {% endif %}
+    
+</div>
 {% endblock%}
+{% if messages %}
+  <br>
+  {% for message in messages %}
+    <div class="alert {{message.tags}}">
+    {{message}}
+    </div>
+  {% endfor %}
+{% endif %}

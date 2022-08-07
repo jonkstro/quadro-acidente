@@ -1,34 +1,45 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% load static %} 
 
-{% load static %}
+{% if messages %}
+  <br>
+  {% for message in messages %}
+    <div class="alert {{message.tags}}">
+    {{message}}
+    </div>
+  {% endfor %}
+{% endif %}
 
 {% block 'head' %}
-  <link rel = "stylesheet" type = "text/css" href = "{% static 'plataforma/css/estilos.css' %}">
-{% endblock %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'plataforma/css/estilos.css' %}"
+/>
+{% endblock %} 
+{% block 'titulo'%} Cadastrar um novo acidente {% endblock%} 
 
-{% block 'titulo'%}
-  Cadastrar um novo acidente
-{% endblock%}
-
-{% block 'body'%}
-
+{% block 'body' %}
 <div class="home">
-    <div class="col-md-12">
-      <div class="col">        
-          <label>Data do Acidente:</label>
-          <input type="date" name="dataAcidente"> <br>
-      </div>
-      <div class="col">
-          <label>Local do Acidente:</label>
-          <input type="text" name="localAcidente"> <br>
-      </div>
-      <div class="col">
-          <label>Nome do Funcionário: </label>
-          <input type="text" name="nomeFuncionario">
-      </div>
+  <div class="col-md-12">
+  <form action = '{% url "cadastrar_acidente"%}' method = 'POST'>{% csrf_token %}
+    <div class="col">
+      <label>Data do Acidente:</label>
+      <input type="date" name="dataAcidente" /> <br />
     </div>
+    <div class="col">
+      <label>Local do Acidente:</label>
+      <input type="text" name="localAcidente" /> <br />
+    </div>
+    <div class="col">
+      <label>Nome do Funcionário: </label>
+      <input type="text" name="nomeFuncionario" />
+    </div>
+  </div>
 
-    <a href="" class="btn btn-primary">Cadastrar Acidente</a>
-    <a href="" class="btn btn-secondary">Retornar</a>
-
+  <input type='submit' value='Cadastrar' href="{% url 'cadastrar_acidente'%}" class="btn btn-success"></input>
+    
+  <a href="{% url 'quadro'%}" class="btn btn-secondary">Retornar</a>
+  </form>
+</div>
 {% endblock%}
+

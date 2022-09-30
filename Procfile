@@ -1,1 +1,1 @@
-web: gunicorn gestao_consumo.wsgi
+web: gunicorn quadro_acidente.wsgi
